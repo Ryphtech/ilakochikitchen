@@ -1,112 +1,125 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
-import DishCard from "./DishCard";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Reveal from "./Reveal";
 
+// Import local assets
+import Dish1 from "@/assets/signatureDish-1.webp"; // Oonu
+import Dish2 from "@/assets/signatureDish-2.jpg";  // Beef Curry
+import Dish3 from "@/assets/signatureDish-3.webp"; // Seafood
+
+const SIGNATURE_DISHES = [
+    {
+        id: 1,
+        name: "Traditional Oonu",
+        description: "A grand Kerala feast served on a banana leaf, featuring aromatic rice, variety of vegetable curries, pickles, and crispy pappadom. The ultimate soul food of Kerala.",
+        image: Dish1,
+    },
+    {
+        id: 2,
+        name: "Nadan Beef Curry",
+        description: "Tender chunks of beef slow-cooked in a spicy, aromatic gravy with roasted coconut, black pepper, and fresh curry leaves. A true classic from the heart of Kerala.",
+        image: Dish2,
+    },
+    {
+        id: 3,
+        name: "Coastal Seafood Platter",
+        description: "Fresh catch from the Arabian Sea, marinated in our secret mix of spices and grilled to perfection. A celebration of Kochi's rich maritime culinary heritage.",
+        image: Dish3,
+    },
+];
+
 export default function SignatureDishes() {
-    const dishes = useMemo(
-        () => [
-            {
-                name: "Meen Pollichathu",
-                description:
-                    "Pearl Spot fish marinated in spicy masala, wrapped in banana leaf and grilled to perfection.",
-                image:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuBpZj7IOsraa2faZQIFkhNJibpXLsDFk9WIVV2Ogsdq0DsCty4dI7aCPl4VFDf89WGEPmvcdiQSUPwm-6VfrF4IXHSZ4CfWuHVTppBjj6w2ecBhgvHcBSzltIeGsDfy7Vt0iG_dZlNAzu7kvhLAQxYdosw5a9b4xovF-nvW_2OrFYfEP2fN1WndRLZI7jPya_mcRrg2Aym36JGNXS-hA9mPy65M7lpI6C_3ts1pexiokJWgDkihkZQR97CgQVF5E1_jywyA768VOFI",
-                tag: "Bestseller",
-            },
-            {
-                name: "Kerala Prawn Curry",
-                description:
-                    "Juicy tiger prawns cooked in a rich coconut milk gravy with raw mangoes and curry leaves.",
-                image:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuBDCUk2F1I2HvXJlhSGy6FO6ultX6IePJ2WBUT9AO1HvYGRX5PAnpC6ddFSLuHz6BTvjBHx7yT86KVx4rEQlIG2qn_Zkd2Bj3mzO74AeL778Pxm4N1GnY8yREOU15dzwrwuNo-9Sfg2jbdMhVl01_2hAhcl-RWteJtDtVXA47Eybkp4ouNz3gDDDep9obcVEGflUcXPB68awkbCdnk2OLfIYYXRN842UCYxl-CwO2CTYPTc---lywtsMOBH77b_wzEu5s9r5dK_onM",
-            },
-            {
-                name: "Tropical Harvest",
-                description:
-                    "A refreshing salad of raw papaya, green mango, and grated coconut with a lime-chili dressing.",
-                image:
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuD5-Xg9ut1umh5fUwbgkcUN7nfRA0XcVM9EpayNQsGz_kUYJYSM-aWXO5_YJKeLXyZhkBnOELgkqEMG1O9l3ZGK_DqtQVI_rGTS71P01XUERGERFTeZKG7NuJzB6E9fHn0TQACLeryyEesQond9j7M8MTs2eP-qzA33VxZQRESbfANeiSTs7jgDqH6wWKJWwy8CI2CkqUQGYf-ur4nm22_QM8oUmwWhP0GWp2yokUMLlhxEnHGG_oLginSmpqA9zV1QviWMoV2r2I8",
-                tag: "Vegan",
-                tagColor: "bg-primary",
-                tagTextColor: "text-background-dark",
-            },
-        ],
-        []
-    );
-
-    const mobileScrollerRef = useRef<HTMLDivElement | null>(null);
-    const [activeIdx, setActiveIdx] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        // Respect reduced motion
-        if (typeof window !== "undefined") {
-            const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-            if (reduced) return;
-        }
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % SIGNATURE_DISHES.length);
+        }, 4000); // 4 seconds total cycle: 2s show, 2s transition overlap if needed (or just 4s for comfort)
+        // User asked for 2sec delay for fade in, let's make the auto-play cycle comfortable.
 
-        const id = window.setInterval(() => {
-            setActiveIdx((v) => (v + 1) % dishes.length);
-        }, 2000);
-
-        return () => window.clearInterval(id);
-    }, [dishes.length]);
-
-    useEffect(() => {
-        const scroller = mobileScrollerRef.current;
-        if (!scroller) return;
-        const child = scroller.children.item(activeIdx) as HTMLElement | null;
-        if (!child) return;
-
-        scroller.scrollTo({
-            left: child.offsetLeft,
-            behavior: "smooth",
-        });
-    }, [activeIdx]);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <section className="py-24 px-6 bg-white dark:bg-zinc-900/50">
+        <section className="py-24 px-6 bg-background-light dark:bg-background-dark overflow-hidden">
             <Reveal>
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                        <div>
-                            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">
-                                Our Menu
-                            </span>
-                            <h2 className="text-4xl font-bold tracking-tight">
-                                Signature Coastal Dishes
-                            </h2>
+                    <div className="mb-16 text-center md:text-left">
+                        <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">
+                            The Finest Flavors
+                        </span>
+                        <h2 className="text-4xl md:text-5xl font-black tracking-tight uppercase">
+                            Our Signature Dishes
+                        </h2>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row items-start gap-12 lg:gap-24">
+                        {/* Left Column: Image Carousel */}
+                        <div className="relative w-full md:w-3/5 aspect-video rounded-3xl overflow-hidden shadow-2xl">
+                            {SIGNATURE_DISHES.map((dish, index) => (
+                                <div
+                                    key={dish.id}
+                                    className={`absolute inset-0 transition-opacity duration-2000 ease-in-out ${index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                                        }`}
+                                >
+                                    <Image
+                                        src={dish.image}
+                                        alt={dish.name}
+                                        fill
+                                        className="object-cover"
+                                        priority={index === 0}
+                                    />
+                                    {/* Subtle Overlay for better text contrast if needed */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                </div>
+                            ))}
                         </div>
-                        <Link
-                            href="#"
-                            className="text-text-main dark:text-white font-semibold hover:text-primary flex items-center gap-1 group"
-                        >
-                            See Full Menu
-                            <span className="material-symbols-outlined text-primary transition-transform group-hover:translate-x-1">
-                                arrow_right_alt
-                            </span>
-                        </Link>
-                    </div>
 
-                    {/* Mobile: 2-cards-per-view auto carousel */}
-                    <div
-                        ref={mobileScrollerRef}
-                        className="md:hidden flex overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory -mx-2 px-2"
-                    >
-                        {dishes.map((dish, index) => (
-                            <div key={index} className="snap-start w-1/2 shrink-0 px-2 pb-2">
-                                <DishCard {...dish} />
+                        {/* Right Column: Description Carousel */}
+                        <div className="relative w-full md:w-2/5 flex flex-col text-center md:text-left pt-4">
+                            <div className="relative min-h-[400px]">
+                                {SIGNATURE_DISHES.map((dish, index) => (
+                                    <div
+                                        key={dish.id}
+                                        className={`absolute inset-0 transition-all duration-2000 ease-in-out transform ${index === currentIndex
+                                            ? "opacity-100 translate-y-0 scale-100 z-10"
+                                            : "opacity-0 translate-y-8 scale-95 pointer-events-none z-0"
+                                            }`}
+                                    >
+                                        <h3 className="text-3xl md:text-5xl font-bold mb-6 text-text-main dark:text-white leading-tight">
+                                            {dish.name}
+                                        </h3>
+                                        <p className="text-lg md:text-xl text-text-muted dark:text-gray-400 leading-relaxed max-w-lg">
+                                            {dish.description}
+                                        </p>
+
+                                        <div className="mt-10 flex items-center justify-center md:justify-start gap-4">
+                                            <div className="h-px w-12 bg-primary"></div>
+                                            <span className="text-sm font-bold tracking-widest uppercase text-primary">
+                                                Authentic Recipe
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
 
-                    {/* Desktop/Tablet: grid */}
-                    <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
-                        {dishes.map((dish, index) => (
-                            <DishCard key={index} {...dish} />
-                        ))}
+                            {/* Carousel Indicators */}
+                            <div className="mt-12 flex items-center justify-center md:justify-start gap-3">
+                                {SIGNATURE_DISHES.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setCurrentIndex(index)}
+                                        className={`h-1.5 transition-all duration-300 rounded-full ${index === currentIndex
+                                            ? "w-8 bg-primary"
+                                            : "w-2 bg-black/10 dark:bg-white/20 hover:bg-black/30 dark:hover:bg-white/40"
+                                            }`}
+                                        aria-label={`Go to dish ${index + 1}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Reveal>
