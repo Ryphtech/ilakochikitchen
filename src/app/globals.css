@@ -206,6 +206,18 @@ body {
   background: #11d411;
 }
 
+@keyframes branch-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes branch-shake {
 
   0%,
@@ -214,7 +226,7 @@ body {
   }
 
   25% {
-    transform: rotate(1deg) translateY(1px);
+    transform: rotate(1.2deg) translateY(1px);
   }
 
   50% {
@@ -222,6 +234,6 @@ body {
   }
 
   75% {
-    transform: rotate(-1deg) translateY(-1px);
+    transform: rotate(-1.2deg) translateY(-1px);
   }
 }

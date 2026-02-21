@@ -62,19 +62,31 @@ export default function Hero() {
     return (
         <section className="relative w-full h-dvh mt-[-56px] md:mt-[-80px] pt-[56px] md:pt-[80px] flex flex-col items-center justify-center overflow-hidden px-6">
             {/* Tree Branches — Top Left & Right */}
-            <div className="absolute top-0 left-0 w-[45%] md:w-[30%] h-auto z-30 pointer-events-none opacity-0 animate-[fade-in_2s_ease-out_0.5s_forwards,branch-shake_7s_ease-in-out_infinite_1s] origin-top-left">
-                <Image
-                    src={TreeBranch}
-                    alt="Decorative tree branch"
-                    className="w-full h-auto object-contain"
-                />
+            {/* Left Branch */}
+            <div className="absolute top-0 left-0 w-[45%] md:w-[30%] h-auto z-30 pointer-events-none">
+                <div className="opacity-0 animate-[branch-slide-down_2s_ease-out_0.5s_both]">
+                    <div className="animate-[branch-shake_7s_ease-in-out_infinite_2.5s_both] origin-top-left">
+                        <Image
+                            src={TreeBranch}
+                            alt="Decorative tree branch"
+                            className="w-full h-auto object-contain"
+                        />
+                    </div>
+                </div>
             </div>
-            <div className="absolute top-0 right-0 w-[45%] md:w-[30%] h-auto z-30 pointer-events-none opacity-0 animate-[fade-in_2s_ease-out_0.8s_forwards,branch-shake_8s_ease-in-out_infinite_1.5s] origin-top-right">
-                <Image
-                    src={TreeBranch}
-                    alt="Decorative tree branch"
-                    className="w-full h-auto object-contain scale-x-[-1]"
-                />
+            {/* Right Branch */}
+            <div className="absolute top-0 right-0 w-[45%] md:w-[30%] h-auto z-30 pointer-events-none">
+                <div className="opacity-0 animate-[branch-slide-down_2s_ease-out_0.8s_both]">
+                    <div className="scale-x-[-1] origin-center">
+                        <div className="animate-[branch-shake_8s_ease-in-out_infinite_2.8s_both] origin-top-left">
+                            <Image
+                                src={TreeBranch}
+                                alt="Decorative tree branch"
+                                className="w-full h-auto object-contain"
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Falling Leaves Effect */}
@@ -82,7 +94,7 @@ export default function Hero() {
                 {FALLING_LEAVES.map((leaf, i) => (
                     <div
                         key={i}
-                        className="absolute w-8 h-8 md:w-10 md:h-10"
+                        className="absolute w-6 h-6 md:w-10 md:h-10"
                         style={{
                             left: `${leaf.leftPct}%`,
                             animation: `${leaf.variant} ${leaf.durationSec}s linear infinite`,
