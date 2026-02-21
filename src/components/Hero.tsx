@@ -59,7 +59,7 @@ const FALLING_LEAVES = [
 ];
 export default function Hero() {
     return (
-        <section className="relative w-full h-[calc(100vh-80px)] flex flex-col items-center justify-center overflow-hidden px-6">
+        <section className="relative w-full h-[calc(100dvh-56px)] md:h-[calc(100dvh-80px)] flex flex-col items-center justify-center overflow-hidden px-6">
             {/* Falling Leaves Effect */}
             <div className="absolute inset-0 pointer-events-none z-40 overflow-hidden">
                 {FALLING_LEAVES.map((leaf, i) => (
@@ -113,7 +113,7 @@ export default function Hero() {
                 {/* Central Hero Image with Reveal Effect */}
                 <div className="relative group opacity-0 animate-fade-in-entry">
                     <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-[#8ae68a]/20 blur-3xl opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-                    <div className="relative w-[320px] h-[320px] md:w-[550px] md:h-[550px] md:-translate-y-8 lg:-translate-y-12">
+                    <div className="relative w-[320px] h-[320px] md:w-[550px] md:h-[550px] -translate-y-6 md:-translate-y-8 lg:-translate-y-12">
                         {/* Fake button-style labels (doesn't affect layout) */}
                         <div className="absolute top-0 md:top-6 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
                             <div className="flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/80 dark:bg-black/40 backdrop-blur px-3 py-2 shadow-sm whitespace-nowrap">
@@ -168,12 +168,12 @@ export default function Hero() {
             </div>
 
             {/* Grass Field at the bottom */}
-            <div className="absolute bottom-[-20px] left-0 w-full h-32 z-30 pointer-events-none flex items-end opacity-0 animate-[fade-in-grass_1.5s_ease-out_1.2s_forwards]">
+            <div className="absolute bottom-0 left-0 w-full h-28 md:h-32 z-30 pointer-events-none flex items-end opacity-0 animate-[fade-in-grass_1.5s_ease-out_1.2s_forwards]">
                 <div className="flex w-full animate-[sway_10s_ease-in-out_infinite]">
                     {[...Array(15)].map((_, i) => (
                         <div
                             key={i}
-                            className="relative flex-1 h-32 min-w-[200px] -ml-10 first:ml-0"
+                            className="relative flex-1 h-28 md:h-32 min-w-[200px] -ml-10 first:ml-0"
                         >
                             <Image
                                 src={HeroGrass}
