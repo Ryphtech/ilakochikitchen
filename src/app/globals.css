@@ -91,6 +91,18 @@
     }
   }
 
+  @keyframes banner-zoom {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
 }
 
 @keyframes fall {
@@ -134,6 +146,7 @@
 }
 
 @keyframes leaf-cta {
+
   0%,
   100% {
     transform: translateY(0) rotate(-2deg) scale(1);
@@ -152,8 +165,10 @@
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 

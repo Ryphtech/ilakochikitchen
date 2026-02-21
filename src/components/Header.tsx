@@ -30,8 +30,8 @@ export default function Header() {
             <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-20 flex items-center justify-between">
                 {/* Left Nav — desktop only */}
                 <nav className="hidden md:flex items-center gap-8">
-                    <Link href="/menu" className="text-sm font-medium hover:text-primary transition-colors">Menu</Link>
-                    <Link href="/#gallery" className="text-sm font-medium hover:text-primary transition-colors">Story</Link>
+                    <Link href="/menu" className="text-sm font-medium text-text-main dark:text-white hover:text-primary transition-colors">Menu</Link>
+                    <Link href="/#gallery" className="text-sm font-medium text-text-main dark:text-white hover:text-primary transition-colors">Story</Link>
                 </nav>
 
                 {/* Logo + Brand — centre on desktop, flex-1 left on mobile */}
@@ -48,7 +48,7 @@ export default function Header() {
                         <Image src={Logo} alt="Ila Kochi Logo" fill className="object-contain" />
                     </div>
                     {/* Brand text: shifts right as logo expands */}
-                    <h1 className={`font-black tracking-tighter uppercase whitespace-nowrap transition-all duration-500
+                    <h1 className={`font-black tracking-tighter uppercase whitespace-nowrap transition-all duration-500 text-text-main dark:text-white
                         ${isScrolled ? "text-xl md:text-2xl" : "text-2xl md:text-2xl"}`}>
                         Ila Kochi
                     </h1>
@@ -56,8 +56,8 @@ export default function Header() {
 
                 {/* Right Nav — desktop only */}
                 <nav className="hidden md:flex items-center gap-8">
-                    <Link href="/#reservations" className="text-sm font-medium hover:text-primary transition-colors">Reservations</Link>
-                    <Link href="/#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</Link>
+                    <Link href="/#reservations" className="text-sm font-medium text-text-main dark:text-white hover:text-primary transition-colors">Reservations</Link>
+                    <Link href="/#contact" className="text-sm font-medium text-text-main dark:text-white hover:text-primary transition-colors">Contact</Link>
                 </nav>
 
                 {/* Mobile Menu Toggle */}

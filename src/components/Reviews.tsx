@@ -42,10 +42,22 @@ export default function Reviews() {
                         Loved by Locals & Travelers
                     </h2>
                 </div>
-                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {reviews.map((review, index) => (
-                        <ReviewCard key={index} {...review} />
-                    ))}
+                <div className="max-w-6xl mx-auto">
+                    {/* Mobile Carousel / Desktop Grid */}
+                    <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory no-scrollbar pb-8 -mx-6 px-6 md:mx-0 md:px-0">
+                        {reviews.map((review, index) => (
+                            <div key={index} className="min-w-[85vw] md:min-w-0 snap-center">
+                                <ReviewCard {...review} />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Simple Scroll Hint for Mobile */}
+                    <div className="flex justify-center gap-1.5 mt-2 md:hidden">
+                        {reviews.map((_, i) => (
+                            <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary/30" />
+                        ))}
+                    </div>
                 </div>
             </Reveal>
         </section>

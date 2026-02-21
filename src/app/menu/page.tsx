@@ -61,7 +61,7 @@ const MenuCategory = ({ title, items, image, dark = false }: { title: string, it
                 <div className="w-full md:w-1/3">
                     <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl">
                         <Image src={image} alt={title} fill className="object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div className="absolute bottom-6 left-6">
                             <h3 className="text-3xl font-black text-white uppercase tracking-tighter italic">{title}</h3>
                         </div>
@@ -70,9 +70,9 @@ const MenuCategory = ({ title, items, image, dark = false }: { title: string, it
             )}
             <div className={`w-full ${image ? 'md:w-2/3' : 'w-full'}`}>
                 {!image && (
-                    <div className="mb-8">
-                        <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Premium Selection</span>
-                        <h2 className={`text-4xl md:text-5xl font-black uppercase italic tracking-tighter ${dark ? 'text-white' : 'text-text-main dark:text-gray-100'}`}>{title}</h2>
+                    <div className="mb-8 text-center sm:text-left">
+                        <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm mb-2 block">Premium Selection</span>
+                        <h2 className="text-4xl md:text-5xl font-black uppercase italic tracking-tighter text-white">{title}</h2>
                     </div>
                 )}
                 <div className={`grid grid-cols-1 ${!image ? 'md:grid-cols-2 lg:grid-cols-3' : ''} gap-x-12 gap-y-6`}>
@@ -83,7 +83,7 @@ const MenuCategory = ({ title, items, image, dark = false }: { title: string, it
                                     {typeof item.name === 'string' ? item.name : item.name.text}
                                 </h4>
                                 {item.description && (
-                                    <p className="text-sm text-text-muted dark:text-gray-400 mt-1">{item.description}</p>
+                                    <p className={`text-sm mt-1 ${dark ? 'text-gray-200' : 'text-text-muted dark:text-gray-400'}`}>{item.description}</p>
                                 )}
                             </div>
                             <div className="text-right shrink-0">
@@ -101,71 +101,76 @@ const MenuCategory = ({ title, items, image, dark = false }: { title: string, it
 
 export default function MenuPage() {
     return (
-        <main className="bg-background-light dark:bg-background-dark min-h-screen font-display">
-            <Header />
+        <div className="dark">
+            <main className="bg-background-dark min-h-screen font-display">
+                <Header />
 
-            {/* Hero Banner for Menu */}
-            <section className="relative h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
-                <Image
-                    src={BannerImg}
-                    alt="Menu Header Background"
-                    fill
-                    className="object-cover scale-110 blur-sm brightness-50"
-                />
-                <div className="relative z-10 text-center text-white">
+                {/* Hero Banner for Menu */}
+                <section className="relative h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
+                    <Image
+                        src={BannerImg}
+                        alt="Menu Header Background"
+                        fill
+                        className="object-cover scale-110 blur-sm brightness-50"
+                    />
+                    <div className="relative z-10 text-center text-white">
+                        <Reveal>
+                            <span className="text-primary font-bold tracking-[0.5em] uppercase text-sm mb-4 block">Taste the Tradition</span>
+                            <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter italic">Our Menu</h1>
+                        </Reveal>
+                    </div>
+                </section>
+
+                {/* Menu Content */}
+                <section className="py-24 px-6 max-w-7xl mx-auto">
                     <Reveal>
-                        <span className="text-primary font-bold tracking-[0.5em] uppercase text-sm mb-4 block">Taste the Tradition</span>
-                        <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter italic">Our Menu</h1>
+                        <MenuCategory
+                            title="Authentic Meals"
+                            items={MENU_DATA.meals}
+                            image={Dish1}
+                            dark={true}
+                        />
                     </Reveal>
-                </div>
-            </section>
 
-            {/* Menu Content */}
-            <section className="py-24 px-6 max-w-7xl mx-auto">
-                <Reveal>
-                    <MenuCategory
-                        title="Authentic Meals"
-                        items={MENU_DATA.meals}
-                        image={Dish1}
-                    />
-                </Reveal>
+                    <Reveal delay={200}>
+                        <MenuCategory
+                            title="Fixed Price Specialties"
+                            items={MENU_DATA.fixedPrice}
+                            dark={true}
+                        />
+                    </Reveal>
 
-                <Reveal delay={200}>
-                    <MenuCategory
-                        title="Fixed Price Specialties"
-                        items={MENU_DATA.fixedPrice}
-                        dark={true}
-                    />
-                </Reveal>
+                    <Reveal delay={400}>
+                        <MenuCategory
+                            title="Fresh Catch - As Per Size"
+                            items={MENU_DATA.asPerSize}
+                            image={Dish3}
+                            dark={true}
+                        />
+                    </Reveal>
 
-                <Reveal delay={400}>
-                    <MenuCategory
-                        title="Fresh Catch - As Per Size"
-                        items={MENU_DATA.asPerSize}
-                        image={Dish3}
-                    />
-                </Reveal>
+                    <Reveal delay={600}>
+                        <MenuCategory
+                            title="Juices & Desserts"
+                            items={MENU_DATA.juices}
+                            dark={true}
+                        />
+                    </Reveal>
 
-                <Reveal delay={600}>
-                    <MenuCategory
-                        title="Juices & Desserts"
-                        items={MENU_DATA.juices}
-                    />
-                </Reveal>
+                    {/* Back to Home CTA */}
+                    <div className="text-center mt-12">
+                        <Link
+                            href="/"
+                            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-black hover:scale-105 transition-transform shadow-xl"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                            Back to Home
+                        </Link>
+                    </div>
+                </section>
 
-                {/* Back to Home CTA */}
-                <div className="text-center mt-12">
-                    <Link
-                        href="/"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-black hover:scale-105 transition-transform shadow-xl"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                        Back to Home
-                    </Link>
-                </div>
-            </section>
-
-            <Footer />
-        </main>
+                <Footer />
+            </main>
+        </div>
     );
 }

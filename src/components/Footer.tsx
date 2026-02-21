@@ -21,7 +21,7 @@ export default function Footer() {
                                         className="object-contain"
                                     />
                                 </div>
-                                <h2 className="text-3xl font-black uppercase tracking-tighter italic">Ila Kochi</h2>
+                                <h2 className="text-3xl font-black uppercase tracking-tighter italic text-text-main dark:text-white">Ila Kochi</h2>
                             </div>
                             <p className="text-text-muted dark:text-gray-400 text-sm max-w-[250px]">
                                 Authentic coastal cuisine inspired by nature, crafted with love.
@@ -45,7 +45,7 @@ export default function Footer() {
                         </div>
                         {/* Links */}
                         <div>
-                            <h4 className="font-bold text-lg mb-6">Explore</h4>
+                            <h4 className="font-bold text-lg mb-6 text-text-main dark:text-white">Explore</h4>
                             <ul className="space-y-3 text-text-muted dark:text-gray-400">
                                 <li>
                                     <Link href="#" className="hover:text-primary transition-colors">
@@ -71,7 +71,7 @@ export default function Footer() {
                         </div>
                         {/* Contact */}
                         <div>
-                            <h4 className="font-bold text-lg mb-6">Contact</h4>
+                            <h4 className="font-bold text-lg mb-6 text-text-main dark:text-white">Contact</h4>
                             <ul className="space-y-3 text-text-muted dark:text-gray-400">
                                 <li className="flex items-start gap-3">
                                     <span className="material-symbols-outlined text-primary mt-0.5 text-lg">
@@ -95,7 +95,7 @@ export default function Footer() {
                         </div>
                         {/* Hours */}
                         <div>
-                            <h4 className="font-bold text-lg mb-6">Opening Hours</h4>
+                            <h4 className="font-bold text-lg mb-6 text-text-main dark:text-white">Opening Hours</h4>
                             <ul className="space-y-3 text-text-muted dark:text-gray-400">
                                 <li className="flex justify-between">
                                     <span>Mon - Thu</span>
