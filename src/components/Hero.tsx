@@ -136,7 +136,7 @@ export default function Hero() {
                     </div>
                 </div>
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background-light/50 to-background-light dark:via-background-dark/50 dark:to-background-dark z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background-light/20 to-background-light dark:via-background-dark/20 dark:to-background-dark z-10"></div>
             </div>
 
             <div className="relative z-40 flex flex-col items-center text-center max-w-4xl mx-auto space-y-4 md:space-y-6 -translate-y-8 md:-translate-y-12 lg:-translate-y-16">
@@ -240,6 +240,9 @@ export default function Hero() {
                     ))}
                 </div>
             </div>
+
+            {/* Final Bottom Fade — Ensures grass "melts" into body background */}
+            <div className="absolute bottom-0 left-0 w-full h-16 md:h-24 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent z-40 pointer-events-none" />
         </section>
     );
 }
