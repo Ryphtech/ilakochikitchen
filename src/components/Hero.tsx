@@ -181,7 +181,7 @@ export default function Hero() {
                 </div>
 
                 {/* Social Media Icons — Glassy Style */}
-                <div className="flex items-center gap-4 -mt-10 md:-mt-24 pointer-events-auto relative z-40 opacity-0 animate-[fade-in_1.5s_ease-out_3.5s_forwards]">
+                <div className="flex items-center gap-4 mt-4 md:-mt-24 pointer-events-auto relative z-40 opacity-0 animate-[fade-in_1.5s_ease-out_3.5s_forwards]">
                     {/* Instagram */}
                     <a
                         href="https://www.instagram.com/ila_kochi_?igsh=dTIwa3pvcDVxaHp2"
