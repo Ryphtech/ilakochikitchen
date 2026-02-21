@@ -5,6 +5,7 @@ import HeroImage from "@/assets/hero-image.png";
 import HeroBananaLeaf from "@/assets/hero-banana-leaf.png";
 import HeroGrass from "@/assets/hero-grass.png";
 import FallingLeaf from "@/assets/falling-leaf-hero.png";
+import TreeBranch from "@/assets/tree-branch-hero.png";
 
 const FALLING_LEAVES = [
     {
@@ -59,13 +60,29 @@ const FALLING_LEAVES = [
 ];
 export default function Hero() {
     return (
-        <section className="relative w-full h-[calc(100dvh-56px)] md:h-[calc(100dvh-80px)] flex flex-col items-center justify-center overflow-hidden px-6">
+        <section className="relative w-full h-dvh mt-[-56px] md:mt-[-80px] pt-[56px] md:pt-[80px] flex flex-col items-center justify-center overflow-hidden px-6">
+            {/* Tree Branches — Top Left & Right */}
+            <div className="absolute top-0 left-0 w-[45%] md:w-[30%] h-auto z-30 pointer-events-none opacity-0 animate-[fade-in_2s_ease-out_0.5s_forwards,branch-shake_7s_ease-in-out_infinite_1s] origin-top-left">
+                <Image
+                    src={TreeBranch}
+                    alt="Decorative tree branch"
+                    className="w-full h-auto object-contain"
+                />
+            </div>
+            <div className="absolute top-0 right-0 w-[45%] md:w-[30%] h-auto z-30 pointer-events-none opacity-0 animate-[fade-in_2s_ease-out_0.8s_forwards,branch-shake_8s_ease-in-out_infinite_1.5s] origin-top-right">
+                <Image
+                    src={TreeBranch}
+                    alt="Decorative tree branch"
+                    className="w-full h-auto object-contain scale-x-[-1]"
+                />
+            </div>
+
             {/* Falling Leaves Effect */}
-            <div className="absolute inset-0 pointer-events-none z-40 overflow-hidden">
+            <div className="absolute top-[56px] md:top-[80px] left-0 right-0 bottom-0 pointer-events-none z-40 overflow-hidden">
                 {FALLING_LEAVES.map((leaf, i) => (
                     <div
                         key={i}
-                        className="absolute top-[-50px] w-8 h-8 md:w-10 md:h-10"
+                        className="absolute w-8 h-8 md:w-10 md:h-10"
                         style={{
                             left: `${leaf.leftPct}%`,
                             animation: `${leaf.variant} ${leaf.durationSec}s linear infinite`,
