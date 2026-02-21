@@ -112,11 +112,11 @@
   }
 
   10% {
-    opacity: 1;
+    opacity: var(--leaf-opacity, 1);
   }
 
   75% {
-    opacity: 0.8;
+    opacity: calc(var(--leaf-opacity, 1) * 0.8);
   }
 
   100% {
@@ -132,11 +132,11 @@
   }
 
   10% {
-    opacity: 1;
+    opacity: var(--leaf-opacity, 1);
   }
 
   75% {
-    opacity: 0.8;
+    opacity: calc(var(--leaf-opacity, 1) * 0.8);
   }
 
   100% {

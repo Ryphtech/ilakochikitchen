@@ -86,9 +86,10 @@ export default function Hero() {
                         style={{
                             left: `${leaf.leftPct}%`,
                             animation: `${leaf.variant} ${leaf.durationSec}s linear infinite`,
-                            animationDelay: `${leaf.delaySec}s`,
-                            opacity: leaf.opacity,
-                        }}
+                            animationDelay: `${leaf.delaySec + 2}s`,
+                            animationFillMode: "backwards",
+                            "--leaf-opacity": leaf.opacity,
+                        } as React.CSSProperties}
                     >
                         <Image
                             src={FallingLeaf}
