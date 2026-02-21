@@ -27,61 +27,42 @@ export default function Header() {
             ? "bg-white/80 dark:bg-background-dark/80 border-b border-[#e7f3e7] dark:border-white/10 py-0"
             : "bg-transparent border-transparent py-2"
             }`}>
-            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                {/* Left Nav */}
+            <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-20 flex items-center justify-between">
+                {/* Left Nav — desktop only */}
                 <nav className="hidden md:flex items-center gap-8">
-                    <Link
-                        href="/menu"
-                        className="text-sm font-medium hover:text-primary transition-colors"
-                    >
-                        Menu
-                    </Link>
-                    <Link
-                        href="/#gallery"
-                        className="text-sm font-medium hover:text-primary transition-colors"
-                    >
-                        Story
-                    </Link>
+                    <Link href="/menu" className="text-sm font-medium hover:text-primary transition-colors">Menu</Link>
+                    <Link href="/#gallery" className="text-sm font-medium hover:text-primary transition-colors">Story</Link>
                 </nav>
 
-                {/* Logo Center */}
+                {/* Logo + Brand — centre on desktop, flex-1 left on mobile */}
                 <Link
                     href="/"
-                    className="flex items-center gap-3 group transition-all duration-500"
+                    className="flex items-center gap-2 group transition-all duration-500 flex-1 md:flex-none justify-start md:justify-center"
                 >
-                    <div className={`relative w-12 h-12 group-hover:rotate-12 transition-all duration-500 ${isScrolled ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
-                        }`}>
-                        <Image
-                            src={Logo}
-                            alt="Ila Kochi Logo"
-                            fill
-                            className="object-contain"
-                        />
+                    {/* Logo image: hidden at top, slides in on scroll */}
+                    <div className={`relative shrink-0 transition-all duration-500 overflow-hidden
+                        ${isScrolled
+                            ? "w-8 h-8 md:w-12 md:h-12 opacity-100 translate-x-0"
+                            : "w-0 h-8 md:w-0 md:h-12 opacity-0 -translate-x-2"
+                        } group-hover:rotate-12`}>
+                        <Image src={Logo} alt="Ila Kochi Logo" fill className="object-contain" />
                     </div>
-                    <h1 className="text-2xl font-black tracking-tighter uppercase whitespace-nowrap">
+                    {/* Brand text: shifts right as logo expands */}
+                    <h1 className={`font-black tracking-tighter uppercase whitespace-nowrap transition-all duration-500
+                        ${isScrolled ? "text-xl md:text-2xl" : "text-2xl md:text-2xl"}`}>
                         Ila Kochi
                     </h1>
                 </Link>
 
-                {/* Right Nav */}
+                {/* Right Nav — desktop only */}
                 <nav className="hidden md:flex items-center gap-8">
-                    <Link
-                        href="/#reservations"
-                        className="text-sm font-medium hover:text-primary transition-colors"
-                    >
-                        Reservations
-                    </Link>
-                    <Link
-                        href="/#contact"
-                        className="text-sm font-medium hover:text-primary transition-colors"
-                    >
-                        Contact
-                    </Link>
+                    <Link href="/#reservations" className="text-sm font-medium hover:text-primary transition-colors">Reservations</Link>
+                    <Link href="/#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</Link>
                 </nav>
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="md:hidden p-2 text-color-text-main dark:text-white"
+                    className="md:hidden p-2 text-color-text-main dark:text-white shrink-0"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     <span className="material-symbols-outlined">
