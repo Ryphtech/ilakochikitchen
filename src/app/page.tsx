@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import SignatureDishes from "@/components/SignatureDishes";
-import Story from "@/components/Story";
+import Banner from "@/components/Banner";
+import Gallery from "@/components/Gallery";
 import Reviews from "@/components/Reviews";
 import ReservationBanner from "@/components/ReservationBanner";
 import Footer from "@/components/Footer";
@@ -19,7 +20,8 @@ export default function Home() {
         <Header />
         <Hero />
         <SignatureDishes />
-        <Story />
+        <Banner />
+        <Gallery />
         <Reviews />
         <ReservationBanner />
         <Footer />

@@ -17,6 +17,10 @@ type RevealProps = {
    * IntersectionObserver rootMargin, e.g. "0px 0px -10% 0px".
    */
   rootMargin?: string;
+  /**
+   * Animation delay in ms.
+   */
+  delay?: number;
 };
 
 export default function Reveal({
@@ -25,6 +29,7 @@ export default function Reveal({
   once = true,
   threshold = 0.15,
   rootMargin = "0px 0px -10% 0px",
+  delay = 200,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
@@ -62,8 +67,9 @@ export default function Reveal({
   return (
     <div
       ref={ref}
+      style={{ transitionDelay: `${delay}ms` }}
       className={[
-        "transition-all duration-1000 delay-200 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
+        "transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
         className,
       ].join(" ")}

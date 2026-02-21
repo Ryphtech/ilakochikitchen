@@ -140,7 +140,7 @@ export default function Hero() {
                 <div className="pointer-events-auto relative z-40 -mt-16 md:-mt-44 lg:-mt-52 opacity-0 animate-[fade-in_1.5s_ease-out_3s_forwards]">
                     <Link
                         id="hero-leaf-cta"
-                        href="#"
+                        href="/menu"
                         className="relative inline-flex items-center justify-center select-none hover:scale-105 transition-transform group"
                         aria-label="Explore menu"
                     >

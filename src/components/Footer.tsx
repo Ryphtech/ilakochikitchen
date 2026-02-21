@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "./Reveal";
+import Logo from "@/assets/hero-image.png";
 
 export default function Footer() {
     return (
@@ -9,14 +11,19 @@ export default function Footer() {
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                         {/* Brand */}
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-2">
-                                <span className="material-symbols-outlined text-3xl text-primary">
-                                    eco
-                                </span>
-                                <h2 className="text-2xl font-black uppercase">Ila Kochi</h2>
+                        <div className="space-y-6 flex flex-col items-center text-center">
+                            <div className="flex flex-col items-center gap-4 group">
+                                <div className="relative w-24 h-24 transition-transform duration-500 group-hover:scale-110">
+                                    <Image
+                                        src={Logo}
+                                        alt="Ila Kochi Logo"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                                <h2 className="text-3xl font-black uppercase tracking-tighter italic">Ila Kochi</h2>
                             </div>
-                            <p className="text-text-muted dark:text-gray-400 text-sm">
+                            <p className="text-text-muted dark:text-gray-400 text-sm max-w-[250px]">
                                 Authentic coastal cuisine inspired by nature, crafted with love.
                             </p>
                             <div className="flex gap-4 pt-2">
@@ -111,14 +118,28 @@ export default function Footer() {
                             </ul>
                         </div>
                     </div>
-                    <div className="pt-8 border-t border-black/5 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-text-muted dark:text-gray-500">
-                        <p>© 2024 Ila Kochi Restaurant. All rights reserved.</p>
-                        <div className="flex gap-6">
-                            <Link href="#" className="hover:text-text-main dark:hover:text-white">
-                                Privacy Policy
-                            </Link>
-                            <Link href="#" className="hover:text-text-main dark:hover:text-white">
-                                Terms of Service
+                    <div className="pt-8 border-t border-black/5 dark:border-white/5 flex flex-col items-center gap-6 text-sm text-text-muted dark:text-gray-500">
+                        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4">
+                            <p>© 2024 Ila Kochi Restaurant. All rights reserved.</p>
+                            <div className="flex gap-6">
+                                <Link href="#" className="hover:text-text-main dark:hover:text-white">
+                                    Privacy Policy
+                                </Link>
+                                <Link href="#" className="hover:text-text-main dark:hover:text-white">
+                                    Terms of Service
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-1 opacity-60 hover:opacity-100 transition-opacity">
+                            <span>Powered by</span>
+                            <Link
+                                href="https://www.ryphtech.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-bold text-primary-dark hover:text-primary transition-colors"
+                            >
+                                Ryphtech
                             </Link>
                         </div>
                     </div>
