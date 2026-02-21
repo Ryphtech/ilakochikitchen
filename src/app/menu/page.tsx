@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+
 import Reveal from "@/components/Reveal";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -159,7 +159,7 @@ export default function MenuPage() {
                         href="/"
                         className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-black hover:scale-105 transition-transform shadow-xl"
                     >
-                        <ChevronLeft className="w-5 h-5" />
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
                         Back to Home
                     </Link>
                 </div>
