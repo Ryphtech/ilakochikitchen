@@ -115,12 +115,12 @@
     opacity: 1;
   }
 
-  90% {
-    opacity: 1;
+  75% {
+    opacity: 0.8;
   }
 
   100% {
-    transform: translateY(110vh) translateX(100px) rotate(720deg);
+    transform: translateY(95vh) translateX(100px) rotate(720deg);
     opacity: 0;
   }
 }
@@ -135,12 +135,12 @@
     opacity: 1;
   }
 
-  90% {
-    opacity: 1;
+  75% {
+    opacity: 0.8;
   }
 
   100% {
-    transform: translateY(110vh) translateX(-100px) rotate(-360deg);
+    transform: translateY(95vh) translateX(-100px) rotate(-360deg);
     opacity: 0;
   }
 }
