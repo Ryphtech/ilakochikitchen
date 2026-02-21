@@ -24,10 +24,11 @@ export default function Header() {
 
     return (
         <header className={`sticky top-0 z-50 w-full backdrop-blur-md transition-all duration-500 ${isScrolled
-            ? "bg-white/80 dark:bg-background-dark/80 border-b border-[#e7f3e7] dark:border-white/10 py-0"
-            : "bg-transparent border-transparent py-2"
+            ? "bg-white/90 dark:bg-background-dark/90 border-b border-[#e7f3e7] dark:border-white/10"
+            : "bg-transparent border-transparent"
             }`}>
-            <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-20 flex items-center">
+            <div className={`max-w-7xl mx-auto px-4 md:px-6 flex items-center transition-all duration-500 ${isScrolled ? "h-14 md:h-16" : "h-14 sm:h-16 md:h-20 lg:h-24"
+                }`}>
                 {/* Left Nav — flex-1 on desktop to balance right side */}
                 <div className="flex-1 hidden md:flex items-center">
                     <nav className="flex items-center gap-8">

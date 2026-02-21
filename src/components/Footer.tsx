@@ -28,14 +28,20 @@ export default function Footer() {
                             </p>
                             <div className="flex gap-4 pt-2">
                                 <Link
-                                    href="#"
+                                    href="https://jsdl.in/DT-25LFHL4WKJE"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors border border-black/5 dark:border-white/5 shadow-sm"
+                                    aria-label="JustDial"
                                 >
-                                    <span className="material-symbols-outlined text-lg">public</span>
+                                    <span className="text-[10px] font-black leading-none">JD</span>
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href="https://www.instagram.com/ila_kochi_?igsh=dTIwa3pvcDVxaHp2"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors border border-black/5 dark:border-white/5 shadow-sm"
+                                    aria-label="Instagram"
                                 >
                                     <span className="material-symbols-outlined text-lg">
                                         photo_camera
