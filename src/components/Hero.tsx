@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,6 +8,9 @@ import HeroBananaLeaf from "@/assets/hero-banana-leaf.png";
 import HeroGrass from "@/assets/hero-grass.png";
 import FallingLeaf from "@/assets/falling-leaf-hero.png";
 import TreeBranch from "@/assets/tree-branch-hero.png";
+import HeroBanner1 from "@/assets/hero-banner-1.jpeg";
+import HeroBanner2 from "@/assets/hero-banner-2.jpeg";
+import HeroBanner3 from "@/assets/hero-banner-3.jpg";
 
 const FALLING_LEAVES = [
     {
@@ -58,7 +63,44 @@ const FALLING_LEAVES = [
         opacity: 0.75,
     },
 ];
+
+const DISPLAY_BANNERS = [
+    HeroBanner2, HeroBanner3, // Clones for end-to-start transition
+    HeroBanner1, HeroBanner2, HeroBanner3, // Main items
+    HeroBanner1, HeroBanner2 // Clones for start-to-end transition
+];
+
 export default function Hero() {
+    const [currentIndex, setCurrentIndex] = React.useState(2); // Start at the "real" first image (HeroBanner1)
+    const [isTransitioning, setIsTransitioning] = React.useState(true);
+
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            setIsTransitioning(true);
+            setCurrentIndex((prev) => prev + 1);
+        }, 4000);
+        return () => clearInterval(interval);
+    }, []);
+
+    React.useEffect(() => {
+        // When we reach the end of the main set (index 5 is the clone of HeroBanner1)
+        if (currentIndex === 5) {
+            const timer = setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(2); // Jump back to the real HeroBanner1
+            }, 1000); // Matches transition duration
+            return () => clearTimeout(timer);
+        }
+        // If we somehow go backwards (index 1 is clone of HeroBanner3)
+        if (currentIndex === 1) {
+            const timer = setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(4); // Jump to real HeroBanner3
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [currentIndex]);
+
     return (
         <section className="relative w-full h-dvh mt-[-56px] sm:mt-[-64px] md:mt-[-80px] lg:mt-[-96px] pt-[56px] sm:pt-[64px] md:pt-[80px] lg:pt-[96px] flex flex-col items-center justify-center overflow-hidden px-6">
             {/* Tree Branches — Top Left & Right */}
@@ -144,8 +186,8 @@ export default function Hero() {
                 <div className="relative group opacity-0 animate-fade-in-entry">
                     <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-[#8ae68a]/20 blur-3xl opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
                     <div className="relative w-[280px] h-[280px] md:w-[480px] md:h-[480px]">
-                        {/* Fake button-style labels (doesn't affect layout) */}
-                        <div className="absolute top-[-10px] md:top-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+                        {/* Fake button-style labels (mobile only) */}
+                        <div className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 z-20 pointer-events-none md:hidden">
                             <div className="flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/80 dark:bg-black/40 backdrop-blur px-3 py-2 shadow-sm whitespace-nowrap">
                                 <span className="text-[10px] md:text-sm font-semibold text-text-main dark:text-white tracking-wide">
                                     Seafood
@@ -221,14 +263,62 @@ export default function Hero() {
                 </div>
             </div>
 
+            {/* Smooth Rotating Carousel */}
+            <div
+                className="relative z-40 w-full overflow-hidden mt-2 md:-mt-8 opacity-0 animate-[fade-in_1.5s_ease-out_4s_forwards]"
+                style={{
+                    '--item-width': '65vw',
+                    '--gap': '12px',
+                } as React.CSSProperties}
+            >
+                <div className="flex justify-center md:[--item-width:450px] md:[--gap:24px]">
+                    <div
+                        className={`flex items-center ${isTransitioning ? 'transition-transform duration-1000 ease-in-out' : ''}`}
+                        style={{
+                            // Since we have 7 items and justify-center on the parent, 
+                            // the middle item (index 3) is naturally centered at 0 translation.
+                            // We shift relative to that index.
+                            transform: `translateX(calc(${(3 - currentIndex)} * (var(--item-width) + var(--gap))))`
+                        }}
+                    >
+                        {DISPLAY_BANNERS.map((banner, idx) => {
+                            const isActive = idx === currentIndex;
+
+                            return (
+                                <div
+                                    key={idx}
+                                    className={`relative aspect-video rounded-3xl overflow-hidden shadow-2xl flex-shrink-0 transition-all duration-1000 ease-out ${isActive ? 'scale-105 z-10 opacity-100' : 'scale-90 z-0 opacity-40'
+                                        }`}
+                                    style={{
+                                        width: 'var(--item-width)',
+                                        marginRight: 'var(--gap)'
+                                    }}
+                                >
+                                    <Image
+                                        src={banner}
+                                        alt={`Hero banner ${idx}`}
+                                        fill
+                                        className={`object-cover transition-all duration-1000 ${!isActive ? 'blur-[4px]' : 'blur-0'}`}
+                                        priority={isActive}
+                                    />
+                                    <div className={`absolute inset-0 transition-colors duration-1000 ${!isActive ? 'bg-black/40' : 'bg-transparent'}`}></div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+
+
+
 
             {/* Grass Field at the bottom */}
-            <div className="absolute bottom-0 left-0 w-full h-28 md:h-32 z-30 pointer-events-none flex items-end opacity-0 animate-[fade-in-grass_1.5s_ease-out_1.2s_forwards]">
+            <div className="absolute bottom-0 left-0 w-full h-16 md:h-20 z-50 pointer-events-none flex items-end opacity-0 animate-[fade-in-grass_1.5s_ease-out_1.2s_forwards]">
                 <div className="flex w-full animate-[sway_10s_ease-in-out_infinite]">
                     {[...Array(15)].map((_, i) => (
                         <div
                             key={i}
-                            className="relative flex-1 h-28 md:h-32 min-w-[200px] -ml-10 first:ml-0"
+                            className="relative flex-1 h-16 md:h-20 min-w-[200px] -ml-10 first:ml-0"
                         >
                             <Image
                                 src={HeroGrass}
@@ -242,7 +332,7 @@ export default function Hero() {
             </div>
 
             {/* Final Bottom Fade — Ensures grass "melts" into body background */}
-            <div className="absolute bottom-0 left-0 w-full h-16 md:h-24 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent z-40 pointer-events-none" />
-        </section>
+            <div className="absolute bottom-0 left-0 w-full h-8 md:h-12 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent z-40 pointer-events-none" />
+        </section >
     );
 }
