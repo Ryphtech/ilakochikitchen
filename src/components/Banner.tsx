@@ -7,7 +7,7 @@ import BannerImg from "@/assets/banner1.jpeg";
 
 export default function Banner() {
     return (
-        <section className="relative w-full h-[400px] md:h-[600px] overflow-hidden group">
+        <section className="relative z-20 w-full h-[400px] md:h-[600px] overflow-hidden group">
             <Reveal className="h-full w-full">
                 {/* Background Image with Automatic Zoom Effect */}
                 <div className="absolute inset-0 w-full h-full">

@@ -53,7 +53,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${workSans.variable} antialiased`}>
+      <body className={`${workSans.variable} antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

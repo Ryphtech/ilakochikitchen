@@ -8,6 +8,7 @@ import Reveal from "./Reveal";
 import Gallery1 from "@/assets/ilakochi-gallery-1.jpeg";
 import Gallery2 from "@/assets/ilakochi-gallery-2.jpeg";
 import Gallery3 from "@/assets/ilakochi-gallery-3.jpeg";
+import HangPlant from "@/assets/ourstory-top-hangplant.png";
 
 const GALLERY_IMAGES = [Gallery1, Gallery2, Gallery3];
 
@@ -22,7 +23,54 @@ export default function Gallery() {
     }, []);
 
     return (
-        <section id="gallery" className="py-24 px-6 bg-white dark:bg-background-dark overflow-hidden">
+        <section id="gallery" className="relative z-10 py-24 px-6 bg-white dark:bg-background-dark">
+            {/* Black Fade Blend Effect at the top — Behind plants */}
+            <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black via-black/40 to-transparent z-[2] pointer-events-none" />
+
+            {/* Micro-blend overlap on top of plants for a seamless gradual fade junction */}
+            <div className="absolute top-0 left-0 w-full h-[30px] bg-gradient-to-b from-black to-transparent z-[10] pointer-events-none" />
+
+            {/* Edge-to-Edge Hanging Plants Canopy — Shifted further down for maximum visibility */}
+            <div className="absolute top-0 left-0 w-full z-[5] pointer-events-none h-[500px] overflow-hidden translate-y-0">
+                <div className="flex w-[110%] -ml-[5%] justify-center -space-x-12 md:-space-x-16">
+                    {[...Array(60)].map((_, i) => (
+                        <Reveal
+                            key={i}
+                            delay={10 + i * 20}
+                            threshold={0.01}
+                            once={true}
+                            initialStyle={{ opacity: 0, transform: "translateY(-80px)" }}
+                            className="flex-shrink-0"
+                        >
+                            <div
+                                className="relative"
+                                style={{
+                                    width: `${140 + (i % 6) * 15}px`,
+                                    height: `${320 + (i % 4) * 40}px`,
+                                    marginTop: "0", // Standardized to top of masked container
+                                    zIndex: i % 10
+                                }}
+                            >
+                                <div
+                                    className="w-full h-full relative"
+                                    style={{
+                                        transform: `rotate(${(i % 2 === 0 ? 1 : -1) * (i % 4)}deg)`
+                                    }}
+                                >
+                                    <Image
+                                        src={HangPlant}
+                                        alt=""
+                                        fill
+                                        className="object-contain object-top"
+                                        priority={i > 25 && i < 35}
+                                    />
+                                </div>
+                            </div>
+                        </Reveal>
+                    ))}
+                </div>
+            </div>
+
             <Reveal>
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
@@ -65,9 +113,9 @@ export default function Gallery() {
                             </div>
                         </div>
 
-                        {/* Right Column: 3:4 Gallery Carousel */}
+                        {/* Right Column: 3:4 Gallery Carousel - Reduced size */}
                         <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                            <div className="relative w-full max-w-[450px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]">
+                            <div className="relative w-full max-w-[380px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]">
                                 {GALLERY_IMAGES.map((img, index) => (
                                     <div
                                         key={index}

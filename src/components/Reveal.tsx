@@ -21,6 +21,10 @@ type RevealProps = {
    * Animation delay in ms.
    */
   delay?: number;
+  /**
+   * Initial style for the hidden state (e.g., transform, opacity).
+   */
+  initialStyle?: React.CSSProperties;
 };
 
 export default function Reveal({
@@ -30,6 +34,7 @@ export default function Reveal({
   threshold = 0.15,
   rootMargin = "0px 0px -10% 0px",
   delay = 200,
+  initialStyle = { opacity: 0, transform: "translateY(24px)" },
 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
@@ -67,10 +72,13 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{
+        transitionDelay: `${delay}ms`,
+        ...(inView ? {} : initialStyle)
+      } as React.CSSProperties}
       className={[
         "transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
-        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
+        inView ? "opacity-100 translate-y-0" : "",
         className,
       ].join(" ")}
     >

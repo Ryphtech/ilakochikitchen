@@ -332,7 +332,7 @@ export default function Hero() {
             </div>
 
             {/* Final Bottom Fade — Ensures grass "melts" into body background */}
-            <div className="absolute bottom-0 left-0 w-full h-8 md:h-12 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent z-40 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-t from-background-light via-background-light/80 to-transparent dark:from-background-dark dark:via-background-dark/80 z-60 pointer-events-none" />
         </section >
     );
 }
